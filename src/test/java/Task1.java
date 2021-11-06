@@ -15,17 +15,18 @@ public class Task1 {
         driver.get("https://passwordsgenerator.net/ru/");
         WebElement generateBtn = driver.findElement(By.xpath("//div[@class='button GenerateBtn']"));
         generateBtn.click();
-        String firstPassword = driver.findElement(By.id("final_pass")).getAttribute("value");
+        WebElement findPass = driver.findElement(By.id("final_pass"));
+        String firstPassword = findPass.getAttribute("value");
         Assert.assertNotEquals("", firstPassword);
         generateBtn.click();
-        String secondPassword = driver.findElement(By.id("final_pass")).getAttribute("value");
+        String secondPassword = findPass.getAttribute("value");
         Assert.assertNotEquals(firstPassword, secondPassword);
         driver.findElement(By.id("Symbols")).click();
         WebElement selectElem = driver.findElement(By.id("pgLength"));
         Select select = new Select(selectElem);
         select.selectByValue("22");
         generateBtn.click();
-        String thirdPassword = driver.findElement(By.id("final_pass")).getAttribute("value");
+        String thirdPassword = findPass.getAttribute("value");
         Assert.assertEquals(22, thirdPassword.length());
     }
 
